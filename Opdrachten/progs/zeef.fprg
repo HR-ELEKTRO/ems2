@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.0">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="brojz"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2017-06-09 08:41:50 "/>
+        <attribute name="created" value="YnJvano7IEZJVEhPR0UtRDJDVU1TRDsgMjAxNy0wNi0wODsgMDg6MTY6MzYgOyAyODQz"/>
+        <attribute name="edited" value="YnJvano7IEZJVEhPR0UtRDJDVU1TRDsgMjAxNy0wNi0wOTsgMDg6NDE6NTAgOyAyODM4"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="isPrime" type="Boolean" array="True" size="20" variables="isPrime[20]"/>
+            <declare name="n" type="Integer" array="False" size="" variables="n"/>
+            <assign variable="n" expression="20"/>
+            <declare name="i" type="Integer" array="False" size="" variables="i"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <assign variable="isPrime[i]" expression="true"/>
+            </for>
+            <call expression="zeef(isPrime, n)"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <if expression="isPrime[i] == true">
+                    <then>
+                        <output expression="i"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+        </body>
+    </function>
+    <function name="zeef" type="None" variable="">
+        <parameters>
+            <parameter name="b" type="Boolean" array="True"/>
+            <parameter name="n" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <assign variable="b[0]" expression="false"/>
+            <assign variable="b[1]" expression="false"/>
+            <declare name="i" type="Integer" array="False" size="" variables="i"/>
+            <for variable="i" start="2" end="n-1" direction="inc" step="1">
+                <declare name="streep" type="Integer" array="False" size="" variables="streep"/>
+                <for variable="streep" start="2 * i" end="n-1" direction="inc" step="i">
+                    <assign variable="b[streep]" expression="false"/>
+                </for>
+            </for>
+        </body>
+    </function>
+</flowgorithm>
