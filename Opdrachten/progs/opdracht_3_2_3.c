@@ -5,6 +5,7 @@
 
 #include <fsl_debug_console.h>
 #include <string.h>
+#include <stdint.h>
 #include "cycle_counter.h"
 
 void BOARD_InitHardware(void);
