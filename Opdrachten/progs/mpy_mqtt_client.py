@@ -51,23 +51,25 @@ def bericht_ontvangen(topic, bericht):
         print("Onbekende kleur")
 
 BROKER = "broker.hivemq.com"
+
 APPARAAT_ID = binascii.hexlify(unique_id()).decode()
+CLIENT_ID = ("ems2-c6-" + APPARAAT_ID).encode() # een unieke ID om mee aan te melden bij de broker
 
 BASISTOPIC = "ems2/" + APPARAAT_ID
-TOPIC_LED = (BASISTOPIC + "/led").encode() #topic waarop de kleur binnenkomt
-TOPIC_TEMPERATUUR = (BASISTOPIC + "/temperatuur").encode() #topic waarop de temperatuur wordt gepubliceerd
-CLIENT_ID = ("ems2-c6-" + APPARAAT_ID).encode() # een unieke ID om mee aan te melden bij de broker
+LEDTOPIC = (BASISTOPIC + "/led").encode() #topic waarop de kleur binnenkomt
+TEMPERATUURTOPIC = (BASISTOPIC + "/temperatuur").encode() #topic waarop de temperatuur wordt gepubliceerd
+
 
 led = NeoPixel(Pin(8, Pin.OUT), 1)
 wlan = verbind_wifi()
 client = MQTTClient(CLIENT_ID, BROKER, port=1883, keepalive=60)
 client.set_callback(bericht_ontvangen)
 client.connect()
-client.subscribe(TOPIC_LED)
+client.subscribe(LEDTOPIC)
 
 print("Verbonden met MQTT-broker:", BROKER)
-print("Geabonneerd op:", TOPIC_LED.decode())
-print("Publiceer temperatuur op:", TOPIC_TEMPERATUUR.decode())
+print("Geabonneerd op:", LEDTOPIC.decode())
+print("Publiceer temperatuur op:", TEMPERATUURTOPIC.decode())
 
 laatste_ping = time.ticks_ms()
 
