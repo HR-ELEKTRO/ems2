@@ -2,7 +2,7 @@ import binascii
 import time
 
 import network
-from machine import Pin, unique_id
+from machine import Pin
 from neopixel import NeoPixel
 from umqtt.simple import MQTTClient
 
@@ -50,9 +50,16 @@ def bericht_ontvangen(topic, bericht):
     else:
         print("Onbekende kleur")
 
+
+
+led = NeoPixel(Pin(8, Pin.OUT), 1)
+wlan = verbind_wifi()
+
+
+
 BROKER = "broker.hivemq.com"
 
-APPARAAT_ID = binascii.hexlify(unique_id()).decode()
+APPARAAT_ID = binascii.hexlify(wlan.config('mac')).decode()
 CLIENT_ID = ("ems2-c6-" + APPARAAT_ID).encode() # een unieke ID om mee aan te melden bij de broker
 
 BASISTOPIC = "ems2/" + APPARAAT_ID
@@ -60,8 +67,7 @@ LEDTOPIC = (BASISTOPIC + "/led").encode() #topic waarop de kleur binnenkomt
 TEMPERATUURTOPIC = (BASISTOPIC + "/temperatuur").encode() #topic waarop de temperatuur wordt gepubliceerd
 
 
-led = NeoPixel(Pin(8, Pin.OUT), 1)
-wlan = verbind_wifi()
+
 client = MQTTClient(CLIENT_ID, BROKER, port=1883, keepalive=60)
 client.set_callback(bericht_ontvangen)
 client.connect()
