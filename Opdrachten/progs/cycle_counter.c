@@ -3,7 +3,7 @@
  * All rights reserved.
  */
 
-#include <mcxa156.h>
+#include <MCXA156.h>
 #include "cycle_counter.h"
 
 void cycle_counter_init(void) {
