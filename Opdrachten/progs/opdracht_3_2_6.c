@@ -49,7 +49,7 @@ int main(void)
     cycle_counter_reset();
     keerom_met_pointers(test2);
     uint32_t cycles2 = cycle_counter_get();
-    PRINTF("\"%s\"\n", test1);
+    PRINTF("\"%s\"\n", test2);
 
     PRINTF("keerom_met_indexen() heeft %d cycles geduurd\n", cycles1);
     PRINTF("keerom_met_pointers() heeft %d cycles geduurd\n", cycles2);
